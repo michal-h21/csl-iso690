@@ -24,7 +24,7 @@
       </email>
     </author>
   </info>
-  <citation et-al-use-first="1" et-al-subsequent-use-first="1" et-al-subsequent-min="3" et-al-min="3" disambiguate-add-givenname="true" disambiguate-add-year-suffix="true" disambiguate-add-names="true">
+  <citation et-al-use-first="1" et-al-subsequent-use-first="1" et-al-min="3" et-al-subsequent-min="4" disambiguate-add-givenname="true" disambiguate-add-year-suffix="true" disambiguate-add-names="true">
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">
         <group delimiter=", ">
@@ -34,14 +34,50 @@
           </text>
         </group>
         <group delimiter=" ">
+          <label variable="locator" form="short" strip-periods="true">
+          </label>
+          <text variable="locator">
+          </text>
         </group>
       </group>
     </layout>
   </citation>
-  <bibliography>
+  <bibliography et-al-use-first="3" et-al-min="4">
+    <sort>
+      <key macro="author">
+      </key>
+      <key variable="title">
+      </key>
+    </sort>
     <layout>
+      <text suffix=". " macro="author">
+      </text>
+      <text suffix=". " macro="title">
+      </text>
+      <text suffix=". " macro="work">
+      </text>
     </layout>
   </bibliography>
+  <macro name="anon">
+    <text term="anonymous" text-case="capitalize-first" form="short" strip-periods="true">
+    </text>
+  </macro>
+  <macro name="author">
+    <names variable="author">
+      <name delimiter="; " name-as-sort-order="all" form="long" demote-non-dropping-particle="never">
+        <name-part name="family" text-case="uppercase">
+        </name-part>
+      </name>
+      <substitute>
+        <names variable="editor">
+        </names>
+        <names variable="translator">
+        </names>
+        <text macro="anon">
+        </text>
+      </substitute>
+    </names>
+  </macro>
   <macro name="author-short">
     <names variable="author">
       <name delimiter="; " form="short">
@@ -58,6 +94,46 @@
       </substitute>
     </names>
   </macro>
+  <macro name="editor">
+    <choose>
+      <if variable="editor">
+        <group delimiter=" ">
+          <names variable="editor">
+            <name delimiter="; " name-as-sort-order="all" form="long">
+              <name-part name="family" text-case="uppercase">
+              </name-part>
+            </name>
+          </names>
+          <label prefix="(" suffix=")" variable="editor" form="short">
+          </label>
+        </group>
+      </if>
+    </choose>
+  </macro>
+  <macro name="title">
+    <choose>
+      <if match="any" type="book">
+        <text font-style="italic" variable="title">
+        </text>
+      </if>
+      <else>
+        <text variable="title">
+        </text>
+      </else>
+    </choose>
+  </macro>
+  <macro name="work">
+    <choose>
+      <if match="any" type="paper-conference chapter">
+        <text value="In ">
+        </text>
+        <text suffix=". " macro="editor">
+        </text>
+      </if>
+    </choose>
+    <text variable="container-title" font-style="italic">
+    </text>
+  </macro>
   <macro name="year-date">
     <choose>
       <if variable="issued">
@@ -72,10 +148,6 @@
         </else>
       </if>
     </choose>
-  </macro>
-  <macro name="anon">
-    <text term="anonymous" text-case="capitalize-first" form="short" strip-periods="true">
-    </text>
   </macro>
 </style>
 

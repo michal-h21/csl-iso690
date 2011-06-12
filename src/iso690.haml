@@ -9,15 +9,33 @@
     %author 
       %name Michal Hoftich
       %email michal.h21@gmail.com
-  %citation {:et-al-min=>"3", :et-al-use-first=>"1", :et-al-subsequent-min=>"3", :et-al-subsequent-use-first=>"1", :disambiguate-add-year-suffix=>"true", :disambiguate-add-names=>"true", :disambiguate-add-givenname=>"true"}
+  %citation {:et-al-min=>"3", :et-al-use-first=>"1", :et-al-subsequent-min=>"4", :et-al-subsequent-use-first=>"1", :disambiguate-add-year-suffix=>"true", :disambiguate-add-names=>"true", :disambiguate-add-givenname=>"true"}
     %layout {:prefix=>"(", :suffix=>")", :delimiter=>";%s%"}
       %group {:delimiter=>",%s%"}
         %group {:delimiter=>",%s%"}
           %text {:macro=>"author-short"}
           %text {:macro=>"year-date"}
         %group {:delimiter=>"%s%"}
-  %bibliography
+          %label {:variable=>"locator", :form=>"short", :strip-periods=>"true"}
+          %text {:variable=>"locator"}
+  %bibliography {:et-al-min=>"4", :et-al-use-first=>"3"}
+    %sort
+      %key {:macro=>"author"}
+      %key {:variable=>"title"}
     %layout
+      %text {:macro=>"author", :suffix=>".%s%"}
+      %text {:macro=>"title", :suffix=>".%s%"}
+      %text {:macro=>"work", :suffix=>".%s%"}
+  %macro {:name=>"anon"}
+    %text {:term=>"anonymous", :form=>"short", :text-case=>"capitalize-first", :strip-periods=>"true"}
+  %macro {:name=>"author"}
+    %names {:variable=>"author"}
+      %name {:delimiter=>";%s%", :form=>"long", :name-as-sort-order=>"all", :demote-non-dropping-particle=>"never"}
+        %name-part {:name=>"family", :text-case=>"uppercase"}
+      %substitute
+        %names {:variable=>"editor"}
+        %names {:variable=>"translator"}
+        %text {:macro=>"anon"}
   %macro {:name=>"author-short"}
     %names {:variable=>"author"}
       %name {:form=>"short", :delimiter=>";%s%"}
@@ -26,6 +44,26 @@
         %names {:variable=>"editor"}
         %names {:variable=>"translator"}
         %text {:macro=>"anon"}
+  %macro {:name=>"editor"}
+    %choose
+      %if {:variable=>"editor"}
+        %group {:delimiter=>"%s%"}
+          %names {:variable=>"editor"}
+            %name {:form=>"long", :name-as-sort-order=>"all", :delimiter=>";%s%"}
+              %name-part {:name=>"family", :text-case=>"uppercase"}
+          %label {:form=>"short", :variable=>"editor", :prefix=>"(", :suffix=>")"}
+  %macro {:name=>"title"}
+    %choose
+      %if {:type=>"book", :match=>"any"}
+        %text {:variable=>"title", :font-style=>"italic"}
+      %else
+        %text {:variable=>"title"}
+  %macro {:name=>"work"}
+    %choose 
+      %if {:type=>"paper-conference chapter", :match=>"any"}
+        %text {:value=>"In%s%"}
+        %text {:macro=>"editor", :suffix=>".%s%"}
+    %text {:variable=>"container-title", :font-style=>"italic"}
   %macro {:name=>"year-date"}
     %choose
       %if {:variable=>"issued"}
@@ -33,6 +71,5 @@
           %date-part {:name=>"year"}
         %else>
           %text {:term=>"no date", :form=>"short"}
-  %macro {:name=>"anon"}
-    %text {:term=>"anonymous", :form=>"short", :text-case=>"capitalize-first", :strip-periods=>"true"}
+  
   
