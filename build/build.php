@@ -7,9 +7,8 @@ for($i = 1; $i < count($argv); $i++)
     $fammel = new Fammel();
     $fammel->parse_file($argv[$i]);
     
-    //echo "HAML:\n\n$input\n\n\nRESULT:\n\n";
-    $output = $fammel->render();
-
+    //femmel bug: spaces at end of attribute are striped. as workaround, %s% is used
+    $output = str_replace("%s%"," ",$fammel->render());
     file_put_contents(str_replace('.haml', '.csl', $argv[$i]), $output);
     echo $output;
   } 
