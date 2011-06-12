@@ -5,16 +5,77 @@
     <title>
       Main style for ISO 690
     </title>
-    <category>
-      author-date
+    <category citation-format="author-date">
     </category>
-
+    <id>
+      http://raw.github.com/michal-h21/csl-iso690/master/src/iso690.csl
+    </id>
+    <updated>
+      2011-06-12T15:20:00+01:00
+    </updated>
+    <link href="http://raw.github.com/michal-h21/csl-iso690/master/src/iso690.csl" rel="self">
+    </link>
+    <author>
+      <name>
+        Michal Hoftich
+      </name>
+      <email>
+        michal.h21@gmail.com
+      </email>
+    </author>
   </info>
-  <macro>
-  </macro>
-  <citation>
+  <citation et-al-use-first="1" et-al-subsequent-use-first="1" et-al-subsequent-min="3" et-al-min="3" disambiguate-add-givenname="true" disambiguate-add-year-suffix="true" disambiguate-add-names="true">
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <group delimiter=", ">
+        <group delimiter=", ">
+          <text macro="author-short">
+          </text>
+          <text macro="year-date">
+          </text>
+        </group>
+        <group delimiter=" ">
+        </group>
+      </group>
+    </layout>
   </citation>
   <bibliography>
+    <layout>
+    </layout>
   </bibliography>
+  <macro name="author-short">
+    <names variable="author">
+      <name delimiter="; " form="short">
+        <name-part name="family" text-case="uppercase">
+        </name-part>
+      </name>
+      <substitute>
+        <names variable="editor">
+        </names>
+        <names variable="translator">
+        </names>
+        <text macro="anon">
+        </text>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="year-date">
+    <choose>
+      <if variable="issued">
+        <date variable="issued">
+          <date-part name="year">
+          </date-part>
+        </date>
+        <else>
+          >
+          <text term="no date" form="short">
+          </text>
+        </else>
+      </if>
+    </choose>
+  </macro>
+  <macro name="anon">
+    <text term="anonymous" text-case="capitalize-first" form="short" strip-periods="true">
+    </text>
+  </macro>
 </style>
 

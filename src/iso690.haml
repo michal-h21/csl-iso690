@@ -2,8 +2,37 @@
 %style{:xmlns=>"http://purl.org/net/xbiblio/csl", :version=>"1.0", :class=>"in-text", :default-locale=>"cs-CZ"}
   %info
     %title Main style for ISO 690
-    %category author-date
-    %
-  %macro
-  %citation
+    %category {:citation-format=>"author-date"}
+    %id http://raw.github.com/michal-h21/csl-iso690/master/src/iso690.csl
+    %updated 2011-06-12T15:20:00+01:00
+    %link {:href=>"http://raw.github.com/michal-h21/csl-iso690/master/src/iso690.csl", :rel=>"self"}
+    %author 
+      %name Michal Hoftich
+      %email michal.h21@gmail.com
+  %citation {:et-al-min=>"3", :et-al-use-first=>"1", :et-al-subsequent-min=>"3", :et-al-subsequent-use-first=>"1", :disambiguate-add-year-suffix=>"true", :disambiguate-add-names=>"true", :disambiguate-add-givenname=>"true"}
+    %layout {:prefix=>"(", :suffix=>")", :delimiter=>";%s%"}
+      %group {:delimiter=>",%s%"}
+        %group {:delimiter=>",%s%"}
+          %text {:macro=>"author-short"}
+          %text {:macro=>"year-date"}
+        %group {:delimiter=>"%s%"}
   %bibliography
+    %layout
+  %macro {:name=>"author-short"}
+    %names {:variable=>"author"}
+      %name {:form=>"short", :delimiter=>";%s%"}
+        %name-part {:name=>"family", :text-case=>"uppercase"}
+      %substitute
+        %names {:variable=>"editor"}
+        %names {:variable=>"translator"}
+        %text {:macro=>"anon"}
+  %macro {:name=>"year-date"}
+    %choose
+      %if {:variable=>"issued"}
+        %date {:variable=>"issued"}
+          %date-part {:name=>"year"}
+        %else>
+          %text {:term=>"no date", :form=>"short"}
+  %macro {:name=>"anon"}
+    %text {:term=>"anonymous", :form=>"short", :text-case=>"capitalize-first", :strip-periods=>"true"}
+  
