@@ -1,0 +1,7 @@
+Building
+========
+
+Source format of csl-iso690 is haml, which is compiled to xml with phamlp[1] library. 
+
+
+[1] http://code.google.com/p/phamlp

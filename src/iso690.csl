@@ -1,0 +1,19 @@
+
+<?xml version='1.0' encoding='utf-8' ?>
+<style version="1.0" default-locale="cs-CZ" xmlns="http://purl.org/net/xbiblio/csl" class="in-text">
+  <info>
+    <title>
+      Main style for ISO 690
+    </title>
+    <category>
+      author-date
+    </category>
+  </info>
+  <macros>
+  </macros>
+  <citation>
+  </citation>
+  <bibliography>
+  </bibliography>
+</style>
+
