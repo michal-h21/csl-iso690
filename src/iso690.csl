@@ -104,7 +104,7 @@
               </name-part>
             </name>
           </names>
-          <label prefix="(" suffix=")" variable="editor" form="short">
+          <label prefix="(" suffix=".)" variable="editor" form="short">
           </label>
         </group>
       </if>
