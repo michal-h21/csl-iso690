@@ -26,6 +26,8 @@
       %text {:macro=>"author", :suffix=>".%s%"}
       %text {:macro=>"title", :suffix=>".%s%"}
       %text {:macro=>"work", :suffix=>".%s%"}
+      %text {:macro=>"publishing", :suffix=>".%s%"}
+      %text {:macro=>"locators", :suffix=>".%s%"}
   %macro {:name=>"anon"}
     %text {:term=>"anonymous", :form=>"short", :text-case=>"capitalize-first", :strip-periods=>"true"}
   %macro {:name=>"author"}
@@ -52,6 +54,39 @@
             %name {:form=>"long", :name-as-sort-order=>"all", :delimiter=>";%s%"}
               %name-part {:name=>"family", :text-case=>"uppercase"}
           %label {:form=>"short", :variable=>"editor", :prefix=>"(", :suffix=>".)"}
+  %macro {:name=>"locators"}
+    %group {:delimiter=>".%s%"}
+      %choose
+        %if {:variable=>"number-of-pages"}
+          %group {:delimiter=>"%s%"}
+            %text {:variable=>"number-of-pages"}
+            %label {:variable=>"page", :form=>"short"}
+  %macro {:name=>"publishing"}
+    %choose
+      %if {:type=>"article article-journal", :match=>"any"}
+        %group {:delimiter=>",%s%"}
+          %date {:variable=>"issued"}
+            %date-part {:name=>"year"}
+          %choose
+            %if {:variable=>"volume"}  
+              %group {:delimiter=>"%s%"}
+                %label {:variable=>"volume", :form=>"short", :suffix=>".%s%"}
+                %number {:variable=>"volume"}
+          %choose
+            %if {:variable=>"issue"}
+              %group {:delimiter=>"%s%"}
+                %label {:variable=>"issue", :form=>"short", :suffix=>".%s%"}
+                %text {:variable=>"issue"}
+          %group {:delimiter=>"%s%"}
+            %label {:variable=>"page", :form=>"short", :suffix=>".%s%"}
+            %text {:variable=>"page"}
+      %else
+        %group {:delimiter=>",%s%"}
+          %group {:delimiter=>"%s%:%s%"}
+            %text {:variable=>"publisher-place"}
+            %text {:variable=>"publisher"}
+          %date {:variable=>"issued"}
+            %date-part {:name=>"year"}
   %macro {:name=>"title"}
     %choose
       %if {:type=>"book", :match=>"any"}
@@ -71,5 +106,3 @@
           %date-part {:name=>"year"}
         %else>
           %text {:term=>"no date", :form=>"short"}
-  
-  

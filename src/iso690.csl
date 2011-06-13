@@ -56,6 +56,10 @@
       </text>
       <text suffix=". " macro="work">
       </text>
+      <text suffix=". " macro="publishing">
+      </text>
+      <text suffix=". " macro="locators">
+      </text>
     </layout>
   </bibliography>
   <macro name="anon">
@@ -108,6 +112,72 @@
           </label>
         </group>
       </if>
+    </choose>
+  </macro>
+  <macro name="locators">
+    <group delimiter=". ">
+      <choose>
+        <if variable="number-of-pages">
+          <group delimiter=" ">
+            <text variable="number-of-pages">
+            </text>
+            <label variable="page" form="short">
+            </label>
+          </group>
+        </if>
+      </choose>
+    </group>
+  </macro>
+  <macro name="publishing">
+    <choose>
+      <if match="any" type="article article-journal">
+        <group delimiter=", ">
+          <date variable="issued">
+            <date-part name="year">
+            </date-part>
+          </date>
+          <choose>
+            <if variable="volume">
+              <group delimiter=" ">
+                <label suffix=". " form="short" variable="volume">
+                </label>
+                <number variable="volume">
+                </number>
+              </group>
+            </if>
+          </choose>
+          <choose>
+            <if variable="issue">
+              <group delimiter=" ">
+                <label suffix=". " variable="issue" form="short">
+                </label>
+                <text variable="issue">
+                </text>
+              </group>
+            </if>
+          </choose>
+          <group delimiter=" ">
+            <label suffix=". " variable="page" form="short">
+            </label>
+            <text variable="page">
+            </text>
+          </group>
+        </group>
+      </if>
+      <else>
+        <group delimiter=", ">
+          <group delimiter=" : ">
+            <text variable="publisher-place">
+            </text>
+            <text variable="publisher">
+            </text>
+          </group>
+          <date variable="issued">
+            <date-part name="year">
+            </date-part>
+          </date>
+        </group>
+      </else>
     </choose>
   </macro>
   <macro name="title">
