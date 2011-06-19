@@ -1,4 +1,3 @@
-
 <?xml version='1.0' encoding='utf-8' ?>
 <style version="1.0" default-locale="cs-CZ" xmlns="http://purl.org/net/xbiblio/csl" class="in-text">
   <info>
@@ -56,6 +55,8 @@
       </text>
       <text suffix=". " macro="work">
       </text>
+      <text suffix=". " macro="edition">
+      </text>
       <text suffix=". " macro="publishing">
       </text>
       <text suffix=". " macro="locators">
@@ -68,13 +69,13 @@
   </macro>
   <macro name="author">
     <names variable="author">
-      <name delimiter="; " name-as-sort-order="all" form="long" demote-non-dropping-particle="never">
+      <name delimiter="; " name-as-sort-order="all" form="long">
         <name-part name="family" text-case="uppercase">
         </name-part>
       </name>
       <substitute>
-        <names variable="editor">
-        </names>
+        <text macro="editor">
+        </text>
         <names variable="translator">
         </names>
         <text macro="anon">
@@ -98,6 +99,14 @@
       </substitute>
     </names>
   </macro>
+  <macro name="edition">
+    <group delimiter=" ">
+      <number variable="edition" form="ordinal">
+      </number>
+      <text term="edition">
+      </text>
+    </group>
+  </macro>
   <macro name="editor">
     <choose>
       <if variable="editor">
@@ -107,9 +116,9 @@
               <name-part name="family" text-case="uppercase">
               </name-part>
             </name>
+            <label prefix=" (" suffix=".)" form="short">
+            </label>
           </names>
-          <label prefix="(" suffix=".)" variable="editor" form="short">
-          </label>
         </group>
       </if>
     </choose>
@@ -126,6 +135,26 @@
           </group>
         </if>
       </choose>
+      <group delimiter=": ">
+        <text term="internet">
+        </text>
+        <text suffix="&gt;" prefix="&lt;" variable="URL">
+        </text>
+      </group>
+    </group>
+  </macro>
+  <macro name="medium">
+    <group prefix=" [" suffix="]">
+      <choose>
+        <if variable="medium">
+          <text variable="medium">
+          </text>
+        </if>
+        <else-if variable="accessed">
+          <text term="online">
+          </text>
+        </else-if>
+      </choose>
     </group>
   </macro>
   <macro name="publishing">
@@ -139,8 +168,8 @@
           <choose>
             <if variable="volume">
               <group delimiter=" ">
-                <label suffix=". " form="short" variable="volume">
-                </label>
+                <text suffix=". " form="short" term="volume">
+                </text>
                 <number variable="volume">
                 </number>
               </group>
@@ -149,8 +178,8 @@
           <choose>
             <if variable="issue">
               <group delimiter=" ">
-                <label suffix=". " variable="issue" form="short">
-                </label>
+                <text suffix=". " term="issue" form="short">
+                </text>
                 <text variable="issue">
                 </text>
               </group>
@@ -179,11 +208,27 @@
         </group>
       </else>
     </choose>
+    <choose>
+      <if variable="accessed">
+        <group delimiter=" " prefix=" [" suffix="]">
+          <text term="accessed">
+          </text>
+          <date variable="accessed" form="numeric" date-parts="year-month-day">
+            <date-part name="month" form="numeric-leading-zeros">
+            </date-part>
+            <date-part name="day" form="numeric-leading-zeros">
+            </date-part>
+          </date>
+        </group>
+      </if>
+    </choose>
   </macro>
   <macro name="title">
     <choose>
       <if match="any" type="book">
         <text font-style="italic" variable="title">
+        </text>
+        <text macro="medium">
         </text>
       </if>
       <else>
@@ -203,6 +248,8 @@
     </choose>
     <text variable="container-title" font-style="italic">
     </text>
+    <text macro="medium">
+    </text>
   </macro>
   <macro name="year-date">
     <choose>
@@ -211,13 +258,11 @@
           <date-part name="year">
           </date-part>
         </date>
-        <else>
-          >
-          <text term="no date" form="short">
-          </text>
-        </else>
       </if>
+      <else>
+        <text term="no date" form="short">
+        </text>
+      </else>
     </choose>
   </macro>
 </style>
-

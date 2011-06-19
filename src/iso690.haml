@@ -26,16 +26,17 @@
       %text {:macro=>"author", :suffix=>".%s%"}
       %text {:macro=>"title", :suffix=>".%s%"}
       %text {:macro=>"work", :suffix=>".%s%"}
+      %text {:macro=>"edition", :suffix=>".%s%"}
       %text {:macro=>"publishing", :suffix=>".%s%"}
       %text {:macro=>"locators", :suffix=>".%s%"}
   %macro {:name=>"anon"}
     %text {:term=>"anonymous", :form=>"short", :text-case=>"capitalize-first", :strip-periods=>"true"}
   %macro {:name=>"author"}
     %names {:variable=>"author"}
-      %name {:delimiter=>";%s%", :form=>"long", :name-as-sort-order=>"all", :demote-non-dropping-particle=>"never"}
+      %name {:delimiter=>";%s%", :form=>"long", :name-as-sort-order=>"all"}
         %name-part {:name=>"family", :text-case=>"uppercase"}
       %substitute
-        %names {:variable=>"editor"}
+        %text {:macro=>"editor"}
         %names {:variable=>"translator"}
         %text {:macro=>"anon"}
   %macro {:name=>"author-short"}
@@ -46,6 +47,10 @@
         %names {:variable=>"editor"}
         %names {:variable=>"translator"}
         %text {:macro=>"anon"}
+  %macro {:name=>"edition"}
+    %group{:delimiter=>"%s%"}
+      %number {:variable=>"edition", :form=>"ordinal"}
+      %text {:term=>"edition"}
   %macro {:name=>"editor"}
     %choose
       %if {:variable=>"editor"}
@@ -53,7 +58,7 @@
           %names {:variable=>"editor"}
             %name {:form=>"long", :name-as-sort-order=>"all", :delimiter=>";%s%"}
               %name-part {:name=>"family", :text-case=>"uppercase"}
-          %label {:form=>"short", :variable=>"editor", :prefix=>"(", :suffix=>".)"}
+            %label {:form=>"short", :prefix=>"%s%(", :suffix=>".)"}
   %macro {:name=>"locators"}
     %group {:delimiter=>".%s%"}
       %choose
@@ -61,6 +66,16 @@
           %group {:delimiter=>"%s%"}
             %text {:variable=>"number-of-pages"}
             %label {:variable=>"page", :form=>"short"}
+      %group {:delimiter=>":%s%"}
+        %text {:term=>"internet"}
+        %text {:variable=>"URL", :prefix=>"&lt;", :suffix=>"&gt;"}
+  %macro {:name=>"medium"}
+    %group {:prefix=>"%s%[", :suffix=>"]"}
+      %choose
+        %if {:variable=>"medium"}
+          %text {:variable=>"medium"}
+        %else-if {:variable=>"accessed"}
+          %text {:term=>"online"}
   %macro {:name=>"publishing"}
     %choose
       %if {:type=>"article article-journal", :match=>"any"}
@@ -70,12 +85,12 @@
           %choose
             %if {:variable=>"volume"}  
               %group {:delimiter=>"%s%"}
-                %label {:variable=>"volume", :form=>"short", :suffix=>".%s%"}
+                %text {:term=>"volume", :form=>"short", :suffix=>".%s%"}
                 %number {:variable=>"volume"}
           %choose
             %if {:variable=>"issue"}
               %group {:delimiter=>"%s%"}
-                %label {:variable=>"issue", :form=>"short", :suffix=>".%s%"}
+                %text {:term=>"issue", :form=>"short", :suffix=>".%s%"}
                 %text {:variable=>"issue"}
           %group {:delimiter=>"%s%"}
             %label {:variable=>"page", :form=>"short", :suffix=>".%s%"}
@@ -87,10 +102,18 @@
             %text {:variable=>"publisher"}
           %date {:variable=>"issued"}
             %date-part {:name=>"year"}
+    %choose
+      %if {:variable=>"accessed"}
+        %group {:prefix=>"%s%[", :suffix=>"]", :delimiter=>"%s%"}
+          %text {:term=>"accessed"}
+          %date {:variable=>"accessed", :form=>"numeric", :date-parts=>"year-month-day"}
+            %date-part {:name=>"month", :form=>"numeric-leading-zeros"}
+            %date-part {:name=>"day", :form=>"numeric-leading-zeros"}
   %macro {:name=>"title"}
     %choose
       %if {:type=>"book", :match=>"any"}
         %text {:variable=>"title", :font-style=>"italic"}
+        %text {:macro=>"medium"}
       %else
         %text {:variable=>"title"}
   %macro {:name=>"work"}
@@ -99,10 +122,11 @@
         %text {:value=>"In%s%"}
         %text {:macro=>"editor", :suffix=>".%s%"}
     %text {:variable=>"container-title", :font-style=>"italic"}
+    %text {:macro=>"medium"}
   %macro {:name=>"year-date"}
     %choose
       %if {:variable=>"issued"}
         %date {:variable=>"issued"}
           %date-part {:name=>"year"}
-        %else>
-          %text {:term=>"no date", :form=>"short"}
+      %else
+        %text {:term=>"no date", :form=>"short"}
