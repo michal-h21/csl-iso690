@@ -1,19 +1,23 @@
 @article{mezei_1999,
 	title = {Látszólagos analógia a történelem előtti időkkel. {H}ajléktalanok {M}agyarországon a 90-es években},
-	number = {2},
+	issue = {2},
 	journal = {Belügyi Szemle},
 	author = {György Mezei},
 	pages={79--90},
 	year = {1999},
+	volume={12},
+	issue={2},
 	hyphenation={magyar}
 },
 
 @article{david_snijders,
 	title = {A budapesti hajléktalanok számának becslése},
-	number = {3},
+	issue = {3},
 	journal = {Szociológiai Szemle},
 	author = {Beáta Dávid and Tom Snijders},
 	year = {2000},
+	volume={45},
+	issue={1},
 	pages={60--75},
 	hyphenation={magyar}
 },
@@ -30,6 +34,7 @@
 	title={Counting the {H}omeless in {L}os {A}ngeles {C}ounty},
 	booktitle = {Probability and Statistics: Essays in Honor of David A. Freedman},
 	publisher = {Institute of Mathematical Statistics, UCLA},
+	address = {New York},
 	author = {Richard Berk and Brian Kriegler and Donald Ylvisaker},
 	year = {2008},
 	pages = {127–141}
@@ -37,7 +42,7 @@
 
 @article{benyei_guraly_gyori_mezei_2000,
 	title = {Tíz év után},
-	number = {1},
+	issue = {1},
 	journal = {Esély},
 	author = {Zoltán Bényei and Zoltán Gurály and Péter Győri and György Mezei},
 	year = {2000},
@@ -46,7 +51,7 @@
 
 @article{gyuris_molnar_szanto_1992,
 	title = {Hajléktalanok. {K}érdőíves vizsgálat 1992-ben},
-	number = {1},
+	issue = {1},
 	journal = {Család, Gyermek, Ifjúság},
 	author = {Tamás Gyuris and László {Molnár D.} and Róbert Szántó},
 	year = {1992},
@@ -56,7 +61,7 @@
 
 @article{cordray_pion_1991,
 	title = {{W}hat’s {B}ehind the volumes? {D}efinitional {I}ssues in {C}ounting {H}omeless},
-	number = {2/3},
+	issue = {2/3},
 	journal = {Housing Policy Debate},
 	author = {Davies S. Cordray},
 	year = {1991},
@@ -71,12 +76,12 @@
 	hyphenation={magyar}
 }
 
-@BOOK{t00,
+@online{t00,
   editor = {Bratková, Eva},
   editortype={compiler},
-  title =  {Metody citování literatury a strukturování bibliografických záznamů podle mezinárodních norem ISO 690 a ISO 690-2}, 
-  subtitle = {metodický materiál pro autory vysokoškolských kvalifikačních prací}, edition = {Verze 2.0, aktualiz. a rozšíř.}, 
-  location = {Praha},
+  title =  {Metody citování literatury a strukturování bibliografických záznamů podle mezinárodních norem ISO 690 a ISO 690-2 : metodický materiál pro autory vysokoškolských kvalifikačních prací}, edition = {Verze 2.0, aktualiz. a rozšíř.}, 
+  address = {Praha},
+  edition={2},
   publisher = {Odborná komise pro otázky elektronického zpřístupňování vysokoškolských kvalifikačních prací, Asociace knihoven vysokých škol ČR},
   date = {2008-12-22},
   pagetotal = {60}, 
@@ -85,15 +90,14 @@
   hyphenation={czech} 
 }
 
-@BOOK{t01,
-  author = {Borgman, Christine L.}, 
+@book{ble,
+  author = {Borgman, Christine L.},
   year={2003},
-  title = {From Gutenberg to the global information infrastructure}, 
-  subtitle = {access to information in the networked world},
-  edition= {first},
-  location = {Cambridge (Mass)}, 
+  title = {From Gutenberg to the global information infrastructure : access to information in the networked world},
+  edition= {1},
+  address = {Cambridge (Mass)},
+  pagetotal =  {324}, 
   publisher = {The MIT Press},
-  pagetotal =  {xviii, 324},
   isbn =  {0-262-52345-0},
   hyphenation={english}
 }
@@ -101,12 +105,11 @@
 @INCOLLECTION{t02,
   author = {Greenberg, David}, 
   year = {1998},
-  title = {Camel drivers and gatecrashers},
-  subtitle = {quality control in the digital research library},
+  title = {Camel drivers and gatecrashers : quality control in the digital research library},
   editor = {Hawkins, B.L and Battin, P},
   booktitle = {The mirage of continuity},
   booksubtitle = {reconfiguring academic information resources for the 21st  century}, 
-  location = {Washington (D.C.)}, 
+  address = {Washington (D.C.)}, 
   publisher = {Council on Library and Information Resources; Association of American Universities}, 
   pages = {105-116},
   hyphenation = {english}
@@ -119,9 +122,42 @@
   subtitle = {the next decade for digital libraries},
   journaltitle = {DLib Magazine},
   volume =  {11},
-  number = {7/8},
+  issue = {7/8},
   urldate ={2005-08-15},
   url = {http://www.dlib.org/dlib/july05/lynch/07lynch.html}, 
   issn = {1082-9873},
   hyphenation = {english} 
+}
+
+@techreport{tech,
+author = {First von Last and von Last, First and von Last, Jr, First},
+title = {The Title},
+type = {Example Report},
+issue = {EG123},
+institution = {The Institution},
+year = {2007},
+month = {October},
+address= {Earth},
+note = {Preprint},
+abstract = {not in bibtex ``standard'' but quite common},
+keywords = {also in common use},
+doi = {will become important},
+leftoffield = {some other data we are not going to worry about}
+}
+
+@ARTICLE{pkey,
+author = {First von Last and von Last, First and von Last, Jr, First},
+title = {paper-title},
+journal= {journal-name},
+year = {2008},
+volume = {15},
+issue = {5}, 
+pages = {200--205},
+month = {March},
+note = {note, useful for storing the authors affiliations},
+key = {key},
+abstract = {not in bibtex ``standard'' but quite common},
+keywords = {also in common use},
+doi = {will become important},
+leftoffield = {some other data we are not going to worry about}
 }
