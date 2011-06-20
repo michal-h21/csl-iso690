@@ -71,7 +71,7 @@
             %text {:variable=>"number-of-pages"}
             %label {:variable=>"page", :form=>"short"}
       %group {:delimiter=>":%s%"}
-        %text {:term=>"internet"}
+        %text {:term=>"www-available", :text-case=>"capitalize-first"}
         %text {:variable=>"URL", :prefix=>"&lt;", :suffix=>"&gt;"}
       %group {:delimiter=>"%s%"}
         %text {:value=>"ISBN"}
@@ -142,3 +142,12 @@
       %term {:name=>"edition", :form=>"short"}
         %single vyd.
         %multiple vyd.
+      %term {:name=>"www-available"}
+        %single dostupné také z WWW
+        %multiple dostupné také z WWW
+  %locale {:xml:lang=>"en"}
+    %terms 
+      %term {:name=>"www-available"}
+        %single available also from WWW
+        %multiple available also from WWW
+        
