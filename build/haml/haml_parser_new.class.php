@@ -106,7 +106,7 @@ class HamlRule
       
     if($this->tag)
     {
-      $rendered .= "$indent<$this->tag";
+      $rendered .= "\n$indent<$this->tag";
 
       if(count($this->attr))
       {
@@ -117,14 +117,14 @@ class HamlRule
         }
       }
       
-      $rendered .= ">\n";
+      $rendered .= ">";//">\n";
     }
     
     if($this->tag && $this->content)
     {
       for($i = 0; $i < $indent_size; $i++)
       {      
-        $rendered .= " ";
+       // $rendered .= " ";
       }
     }
     
@@ -145,7 +145,7 @@ class HamlRule
         
         break;
         
-      case HamlRule::CONTENT:   if($this->content) $rendered .= "$indent$this->content"; break;
+      case HamlRule::CONTENT:   if($this->content) $rendered .= "$this->content"; break;//"$indent$this->content"; break;
       case HamlRule::EXEC_ECHO: $rendered .= "$indent<?php echo $this->content ?>"; break;
       case HamlRule::EXEC:    
         
@@ -168,7 +168,7 @@ class HamlRule
     
     if($this->content || (!$this->content && !$this->tag))
     {
-      $rendered .= "\n";
+      //$rendered .= "\n";
     }
     
     foreach($this->children as $child)
@@ -199,7 +199,7 @@ class HamlRule
     
     if($this->tag)
     {
-      $rendered .= "$indent</$this->tag>\n";
+      $rendered .= "</$this->tag>\n";//"$indent</$this->tag>\n";
     }
     
     return $rendered;
