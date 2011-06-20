@@ -1,13 +1,11 @@
 # ISO 690 pro CSL
 
-## Problémy:
-- Chybí proměnný pro podtitulky. Když mám v bib souboru
+Testovací verze stylu pro bibliografické citace podle normy ISO 690 ve formátu *csl 1.0*. Testováno v procesoru *citeproc-hs* a *citeproc-js*. Oficiální lokalizační soubor CSL pro češtinu je pro starší verzi tohoto jazyka, obsahuje některé nepřeložené řetězce a chybně tiskne řadové číslovky. Opravená verze je k dispozici na adrese <https://github.com/michal-h21/locales/blob/master/locales-cs-CZ.xml>. 
 
-    title={Titulek},
-    subtitle={podtitulek},
+V současnosti styl řeší hlavně formátování seznamu literatury, metodám pro citování (author-year, numeric a poznámky pod čarou) se budu věnovat později. 
 
-  dostanu *Titulek podtitulek*. Nezdá se, že by to šlo nějak ovlivnit.
-   
-## Pozitiva
-- Podporuje bib soubory pro biblatex, jen musí mít příponu bbx. 
-       
+## Problémy
+
+- Nefunguje v aplikaci *Mendeley*. Nemám tušení proč, asi bude třeba obrátit se na support
+
+- Při exportu do html se v pandocu znaky pro < a > zobrazují jako entity
